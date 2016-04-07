@@ -1,6 +1,6 @@
 # Android Boilerplate
 
-Sample Android app that we use at [ribot](http://ribot.co.uk) as a reference for new Android projects. It demonstrates the architecture, tools and guidelines that we use when developing for the Android platform (https://github.com/ribot/android-guidelines)
+Sample Android app that we use at FriendlyRobot as a reference for new Android projects. It demonstrates the architecture, tools and guidelines that we use when developing for the Android platform.  Initial project was forked from ribot  and modified to include Immutable data objects, a custom OKHTTP cache interceptor & our custom data stores and interactions rather than a single data manager. 
 
 Libraries and tools included:
 
@@ -29,9 +29,9 @@ Libraries and tools included:
 
 ## Architecture
 
-This project was based on ribot's Android architecture guidelines that are based on [MVP (Model View Presenter)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter). Read more about them [here](https://github.com/ribot/android-guidelines/blob/master/architecture_guidelines/android_architecture.md). 
 
-![](https://github.com/ribot/android-guidelines/raw/master/architecture_guidelines/architecture_diagram.png)
+
+
 
 ### How to implement a new screen following MVP
 
@@ -45,6 +45,10 @@ Imagine you have to implement a sign in screen.
 6. Create a `SignInPresenterTest`and write unit tests for `signIn(email)`. Remember to mock the  `SignInMvpView` and also the `DataManager`.
 7. Make your  `ActivitySignIn` implement `SignInMvpView` and implement the required methods like `showSignInSuccessful()`
 8. In your activity, inject a new instance of `SignInPresenter` and call `presenter.attachView(this)` from `onCreate` and `presenter.detachView()` from `onDestroy()`. Also, set up a click listener in your button that calls `presenter.signIn(email)`.
+9. Create Immutable Value objects for `SignInRequest` & `SignInResponse`
+10. Create a `SignInAction` & add necessary endpoint to `Api`
+11. If data fetching with caching is necessary encapsulate the `API` call into a Store giving you a memory & network cache
+12. If data needs to be saved in `SQLLite` create necessary create table & query statements within `sqlDelight` directory and have your data model extend `{TableNameModel}` (See example in source)
 
 ## Code Quality
 
@@ -129,7 +133,7 @@ To upload a release build to Crashlytics run:
 
 To quickly start a new project from this boilerplate follow the next steps:
 
-* Download this [repository as a zip](https://github.com/ribot/android-boilerplate/archive/master.zip).
+* Clone this repo
 * Change the package name. 
   * Rename packages in main, androidTest and test using Android Studio.
   * In `app/build.gradle` file, `packageName` and `testInstrumentationRunner`.
