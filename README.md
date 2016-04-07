@@ -10,10 +10,11 @@ Libraries and tools included:
 - [Retrofit 2](http://square.github.io/retrofit/)
 - [Dagger 2](http://google.github.io/dagger/)
 - [SqlBrite](https://github.com/square/sqlbrite)
+- [SqlDelight](https://github.com/square/sqldelight)
+- [Immutables](https://github.com/immutables/immutables)
 - [Butterknife](https://github.com/JakeWharton/butterknife)
 - [Timber](https://github.com/JakeWharton/timber)
 - [Picasso](http://square.github.io/picasso/)
-- [Otto](http://square.github.io/otto/) event bus
 - Functional tests with [Espresso](https://code.google.com/p/android-test-kit/wiki/Espresso)
 - [Robolectric](http://robolectric.org/)
 - [Mockito](http://mockito.org/)
@@ -28,7 +29,7 @@ Libraries and tools included:
 
 ## Architecture
 
-This project follows ribot's Android architecture guidelines that are based on [MVP (Model View Presenter)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter). Read more about them [here](https://github.com/ribot/android-guidelines/blob/master/architecture_guidelines/android_architecture.md). 
+This project was based on ribot's Android architecture guidelines that are based on [MVP (Model View Presenter)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter). Read more about them [here](https://github.com/ribot/android-guidelines/blob/master/architecture_guidelines/android_architecture.md). 
 
 ![](https://github.com/ribot/android-guidelines/raw/master/architecture_guidelines/architecture_diagram.png)
 
@@ -37,7 +38,7 @@ This project follows ribot's Android architecture guidelines that are based on [
 Imagine you have to implement a sign in screen. 
 
 1. Create a new package under `ui` called `signin`
-2. Create an new Activity called `ActivitySignIn`. You could also use a Fragment.
+2. Create an new Activity called `ActivitySignIn`. You could also use a Custom View class.
 3. Define the view interface that your Activity is going to implement. Create a new interface called `SignInMvpView` that extends `MvpView`. Add the methods that you think will be necessary, e.g. `showSignInSuccessful()`
 4. Create a `SignInPresenter` class that extends `BasePresenter<SignInMvpView>`
 5. Implement the methods in `SignInPresenter` that your Activity requires to perform the necessary actions, e.g. `signIn(String email)`. Once the sign in action finishes you should call `getMvpView().showSignInSuccessful()`.
